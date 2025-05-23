@@ -1,1 +1,12 @@
 @import 'tailwindcss';
+
+/* colors */
+@theme {
+	--color-*: initial;
+}
+
+/* typogrphy */
+@theme {
+	--font-*: initial;
+	--text-*: initial;
+}
