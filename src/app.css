@@ -3,6 +3,19 @@
 /* colors */
 @theme {
 	--color-*: initial;
+
+	--color-black: hsl(0, 0%, 0%);
+	--color-white: hsl(0, 0%, 100%);
+
+	--color-light-300: hsl(240, 5%, 96%);
+	--color-light-400: hsl(240, 5%, 65%);
+
+	--color-dark-400: hsl(240, 4%, 16%);
+	--color-dark-500: hsl(240, 6%, 10%);
+
+	--color-primary: hsl(142, 77%, 73%);
+
+	--color-accent: hsl(50, 98%, 64%);
 }
 
 /* typogrphy */
