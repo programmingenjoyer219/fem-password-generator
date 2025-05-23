@@ -1,4 +1,4 @@
-type PasswordStrength = 'weak' | 'medium' | 'strong';
+export type PasswordStrengthLevel = 'weak' | 'medium' | 'strong';
 
 class PasswordGenerator {
 	password: string = $state('');
@@ -7,9 +7,9 @@ class PasswordGenerator {
 	lowercase: boolean = $state(false);
 	symbols: boolean = $state(false);
 	// --------
-	strength: PasswordStrength = $derived.by(this.evaluateStrength.bind(this));
+	strength: PasswordStrengthLevel = $derived.by(this.evaluateStrength.bind(this));
 
-	evaluateStrength(): PasswordStrength {
+	evaluateStrength(): PasswordStrengthLevel {
 		return 'weak';
 	}
 
