@@ -31,6 +31,25 @@
 	--text-xl: 1.75rem;
 }
 
+.range-slider {
+	@apply bg-primary h-2 w-full appearance-none rounded-lg;
+
+	/* Chrome & Safari */
+	&::-webkit-slider-thumb {
+		@apply bg-dark-400 h-4 w-4 cursor-pointer appearance-none rounded-full border;
+	}
+
+	/* Firefox */
+	&::-moz-range-thumb {
+		@apply bg-dark-400 h-4 w-4 cursor-pointer rounded-full;
+	}
+
+	/* Track styling for Firefox */
+	&::-moz-range-track {
+		@apply bg-primary h-2 rounded-lg;
+	}
+}
+
 body {
 	@apply bg-dark-500 text-light-300 min-h-dvh font-mono;
 }
