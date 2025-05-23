@@ -18,7 +18,7 @@
 	--color-accent: hsl(50, 98%, 64%);
 }
 
-/* typogrphy */
+/* typography */
 @theme {
 	--font-*: initial;
 	--text-*: initial;
