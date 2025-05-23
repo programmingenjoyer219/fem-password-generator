@@ -1,2 +1,8 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+	import PasswordConfig from '$lib/PasswordConfig.svelte';
+	import PasswordDisplay from '$lib/PasswordDisplay.svelte';
+</script>
+
+<h1 class="text-md text-light-400 text-center font-medium">Password Generator</h1>
+<PasswordDisplay />
+<PasswordConfig />

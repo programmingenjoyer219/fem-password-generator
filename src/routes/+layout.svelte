@@ -13,4 +13,6 @@
 	/>
 </svelte:head>
 
-{@render children()}
+<main class="container mx-auto max-w-md space-y-4 px-6 py-8">
+	{@render children()}
+</main>
