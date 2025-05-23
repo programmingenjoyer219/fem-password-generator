@@ -1,3 +1,11 @@
+<script lang="ts">
+	interface Props {
+		password: string;
+	}
+
+	let { password }: Props = $props();
+</script>
+
 {#snippet CopyIcon()}
 	<svg
 		class="stroke-primary group-hover:stroke-light-300 size-6 transition-transform duration-200 group-hover:-translate-y-0.5"
@@ -13,7 +21,7 @@
 
 <section class="bg-dark-400 rounded-sm p-4">
 	<div class="flex items-center justify-between">
-		<span aria-label="Generated password:" class="text-light-400 text-xl">P@$SW0rD!</span>
+		<span aria-label="Generated password:" class="text-light-400 text-xl">{password}</span>
 		<button
 			title="copy to clipboard"
 			class="group border-primary hover:border-light-300 rounded border p-2 transition-colors duration-200"
