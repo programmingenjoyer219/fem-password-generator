@@ -22,4 +22,6 @@
 @theme {
 	--font-*: initial;
 	--text-*: initial;
+
+	--font-mono: 'JetBrains Mono', monospace;
 }
