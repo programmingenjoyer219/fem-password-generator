@@ -24,4 +24,9 @@
 	--text-*: initial;
 
 	--font-mono: 'JetBrains Mono', monospace;
+
+	--text-base: 1rem;
+	--text-md: 1.25rem;
+	--text-lg: 1.5rem;
+	--text-xl: 1.75rem;
 }
