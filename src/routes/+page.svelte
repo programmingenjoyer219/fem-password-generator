@@ -6,4 +6,11 @@
 
 <h1 class="text-md text-light-400 text-center font-medium">Password Generator</h1>
 <PasswordDisplay password={passwordGenerator.password} />
-<PasswordConfig />
+<PasswordConfig
+	bind:length={passwordGenerator.length}
+	bind:lowercase={passwordGenerator.lowercase}
+	bind:uppercase={passwordGenerator.uppercase}
+	bind:numbers={passwordGenerator.numbers}
+	bind:symbols={passwordGenerator.symbols}
+	strength={passwordGenerator.strength}
+/>

@@ -1,5 +1,24 @@
-<script>
+<script lang="ts">
+	import { type PasswordStrengthLevel } from './password.svelte';
 	import PasswordStrength from './PasswordStrength.svelte';
+
+	interface Props {
+		length: number;
+		uppercase: boolean;
+		lowercase: boolean;
+		numbers: boolean;
+		symbols: boolean;
+		strength: PasswordStrengthLevel;
+	}
+
+	let {
+		length = $bindable(0),
+		uppercase = $bindable(false),
+		lowercase = $bindable(false),
+		numbers = $bindable(false),
+		symbols = $bindable(false),
+		strength
+	}: Props = $props();
 </script>
 
 {#snippet RightArrowIcon()}
@@ -20,7 +39,7 @@
 		<div class="space-y-4">
 			<label for="password-length" class="flex items-center justify-between">
 				<span>Password Length</span>
-				<span class="text-primary text-lg">0</span>
+				<span class="text-primary text-lg">{length}</span>
 			</label>
 			<input
 				class="range-slider w-full"
@@ -31,6 +50,7 @@
 				defaultValue={0}
 				name="password-length"
 				id="password-length"
+				bind:value={length}
 			/>
 		</div>
 
@@ -42,6 +62,7 @@
 					type="checkbox"
 					name="uppercase-letters"
 					id="uppercase-letters"
+					bind:checked={uppercase}
 				/>
 			</div>
 
@@ -52,21 +73,34 @@
 					type="checkbox"
 					name="lowercase-letters"
 					id="lowercase-letters"
+					bind:checked={lowercase}
 				/>
 			</div>
 
 			<div class="flex flex-row-reverse items-center justify-end gap-4">
 				<label for="numbers">Include numbers</label>
-				<input class="accent-primary" type="checkbox" name="numbers" id="numbers" />
+				<input
+					class="accent-primary"
+					type="checkbox"
+					name="numbers"
+					id="numbers"
+					bind:checked={numbers}
+				/>
 			</div>
 
 			<div class="flex flex-row-reverse items-center justify-end gap-4">
 				<label for="symbols">Include symbols</label>
-				<input class="accent-primary" type="checkbox" name="symbols" id="symbols" />
+				<input
+					class="accent-primary"
+					type="checkbox"
+					name="symbols"
+					id="symbols"
+					bind:checked={symbols}
+				/>
 			</div>
 		</div>
 
-		<PasswordStrength />
+		<PasswordStrength {strength} />
 
 		<button
 			type="submit"
