@@ -50,6 +50,18 @@
 	}
 }
 
+:is(
+		a[href],
+		button,
+		input,
+		textarea,
+		select,
+		details,
+		[tabindex]:not([tabindex='-1'])
+	):focus-visible {
+	@apply outline-primary outline-2 outline-offset-2;
+}
+
 body {
 	@apply bg-dark-500 text-light-300 min-h-dvh font-mono;
 }
