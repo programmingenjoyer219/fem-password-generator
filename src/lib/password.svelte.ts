@@ -1,14 +1,18 @@
 export type PasswordStrengthLevel = 'weak' | 'medium' | 'strong';
 
 class PasswordGenerator {
-	password: string = $state('');
 	length: number = $state(0);
 	uppercase: boolean = $state(false);
 	lowercase: boolean = $state(false);
 	numbers: boolean = $state(false);
 	symbols: boolean = $state(false);
 	// --------
+	password: string = $derived.by(this.generatePassword.bind(this));
 	strength: PasswordStrengthLevel = $derived.by(this.evaluateStrength.bind(this));
+
+	generatePassword(): string {
+		return 'P4$SW0rD!';
+	}
 
 	evaluateStrength(): PasswordStrengthLevel {
 		return 'weak';
