@@ -25,7 +25,7 @@
 
 <section class="bg-dark-400 rounded-sm p-4">
 	<div class="flex items-center justify-between">
-		<span aria-label="Generated password:" class="text-light-400 text-xl">{password}</span>
+		<span aria-label="Generated password:" class="text-light-400 text-lg">{password}</span>
 		<button
 			onclick={copyToClipboard}
 			title="copy to clipboard"
