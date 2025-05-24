@@ -44,7 +44,7 @@
 			<input
 				class="range-slider w-full"
 				type="range"
-				min="0"
+				min="10"
 				max="20"
 				step="1"
 				defaultValue={0}

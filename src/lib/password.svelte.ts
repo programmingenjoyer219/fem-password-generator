@@ -1,7 +1,7 @@
 export type PasswordStrengthLevel = 'weak' | 'medium' | 'strong';
 
 class PasswordGenerator {
-	length: number = $state(0);
+	length: number = $state(10);
 	uppercase: boolean = $state(false);
 	lowercase: boolean = $state(false);
 	numbers: boolean = $state(false);
@@ -20,7 +20,7 @@ class PasswordGenerator {
 
 	reset() {
 		this.password = '';
-		this.length = 0;
+		this.length = 10;
 		this.uppercase = false;
 		this.lowercase = false;
 		this.lowercase = false;
