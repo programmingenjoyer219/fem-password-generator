@@ -1,6 +1,71 @@
 export type PasswordStrengthLevel = 'weak' | 'medium' | 'strong';
 
 class PasswordGenerator {
+	static INGREDIENTS = {
+		uppercaseLetters: [
+			'A',
+			'B',
+			'C',
+			'D',
+			'E',
+			'F',
+			'G',
+			'H',
+			'I',
+			'J',
+			'K',
+			'L',
+			'M',
+			'N',
+			'O',
+			'P',
+			'Q',
+			'R',
+			'S',
+			'T',
+			'U',
+			'V',
+			'W',
+			'X',
+			'Y',
+			'Z'
+		],
+		symbols: [
+			'!',
+			'@',
+			'#',
+			'$',
+			'%',
+			'^',
+			'&',
+			'*',
+			'(',
+			')',
+			'-',
+			'_',
+			'=',
+			'+',
+			'[',
+			']',
+			'{',
+			'}',
+			';',
+			':',
+			"'",
+			'"',
+			'\\',
+			'|',
+			',',
+			'.',
+			'<',
+			'>',
+			'/',
+			'?',
+			'`',
+			'~'
+		]
+	};
+	// --------
 	length: number = $state(10);
 	uppercase: boolean = $state(false);
 	lowercase: boolean = $state(false);
