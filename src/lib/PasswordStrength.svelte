@@ -1,8 +1,6 @@
 <script lang="ts">
-	import type { PasswordStrengthLevel } from './password.svelte';
-
 	interface Props {
-		strength: PasswordStrengthLevel;
+		strength: 'weak' | 'medium' | 'strong';
 	}
 
 	let { strength }: Props = $props();
