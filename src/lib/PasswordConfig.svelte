@@ -59,6 +59,23 @@
 	>
 {/snippet}
 
+{#snippet PasswordOption({ labelText, optionName }: { labelText: string; optionName: string })}
+	<div class="flex flex-row-reverse items-center justify-end gap-4">
+		<label for={optionName}>{labelText}</label>
+		<input class="accent-primary" type="checkbox" name={optionName} id={optionName} />
+	</div>
+{/snippet}
+
+{#snippet GeneratePasswordButton()}
+	<button
+		type="submit"
+		class="group bg-primary text-dark-400 border-primary hover:bg-dark-400 hover:text-primary flex w-full items-center justify-center gap-2 border py-2 font-bold transition-all duration-200 hover:gap-4"
+	>
+		<span>GENERATE</span>
+		{@render RightArrowIcon()}
+	</button>
+{/snippet}
+
 <section class="bg-dark-400 rounded-sm p-4">
 	<form class="space-y-4" onsubmit={handleSubmit}>
 		<div class="space-y-4">
@@ -72,7 +89,7 @@
 				min="10"
 				max="20"
 				step="1"
-				defaultValue={0}
+				defaultValue={10}
 				name="password-length"
 				id="password-length"
 				bind:value={passwordLength}
@@ -84,47 +101,25 @@
 		{/if}
 
 		<div class="space-y-2">
-			<div class="flex flex-row-reverse items-center justify-end gap-4">
-				<label for="uppercase-letters">Include uppercase letters</label>
-				<input
-					class="accent-primary"
-					type="checkbox"
-					name="uppercase-letters"
-					id="uppercase-letters"
-				/>
-			</div>
+			{@render PasswordOption({
+				labelText: 'Include uppercase letters',
+				optionName: 'uppercase-letters'
+			})}
 
-			<div class="flex flex-row-reverse items-center justify-end gap-4">
-				<label for="lowercase-letters">Include lowercase letters</label>
-				<input
-					class="accent-primary"
-					type="checkbox"
-					name="lowercase-letters"
-					id="lowercase-letters"
-				/>
-			</div>
+			{@render PasswordOption({
+				labelText: 'Include lowercase letters',
+				optionName: 'lowercase-letters'
+			})}
 
-			<div class="flex flex-row-reverse items-center justify-end gap-4">
-				<label for="numbers">Include numbers</label>
-				<input class="accent-primary" type="checkbox" name="numbers" id="numbers" />
-			</div>
+			{@render PasswordOption({ labelText: 'Include numbers', optionName: 'numbers' })}
 
-			<div class="flex flex-row-reverse items-center justify-end gap-4">
-				<label for="symbols">Include symbols</label>
-				<input class="accent-primary" type="checkbox" name="symbols" id="symbols" />
-			</div>
+			{@render PasswordOption({ labelText: 'Include symbols', optionName: 'symbols' })}
 		</div>
 
 		{#if submissionError}
 			<p class="text-accent">{submissionError}</p>
 		{/if}
 
-		<button
-			type="submit"
-			class="group bg-primary text-dark-400 border-primary hover:bg-dark-400 hover:text-primary flex w-full items-center justify-center gap-2 border py-2 font-bold transition-all duration-200 hover:gap-4"
-		>
-			<span>GENERATE</span>
-			{@render RightArrowIcon()}
-		</button>
+		{@render GeneratePasswordButton()}
 	</form>
 </section>
