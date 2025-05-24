@@ -1,6 +1,6 @@
 export type PasswordStrengthLevel = 'weak' | 'medium' | 'strong';
 
-class PasswordGenerator {
+export class PasswordGenerator {
 	static INGREDIENTS = {
 		uppercaseLetters: [
 			'A',
