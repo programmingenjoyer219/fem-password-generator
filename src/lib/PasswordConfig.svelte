@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { generatePassword, noOptionsSelected, type PasswordConfig } from './password.svelte';
 	import PasswordStrength from './PasswordStrength.svelte';
 
 	interface Props {
@@ -6,8 +7,44 @@
 	}
 
 	let { password = $bindable('') }: Props = $props();
-
 	let passwordLength = $state(10);
+	let optionSelectionError = $state<null | string>(null);
+	let submissionError = $state<null | string>(null);
+
+	function handleSubmit(event: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement }) {
+		event.preventDefault();
+
+		const passwordConfig = extractFormData();
+
+		if (noOptionsSelected(passwordConfig)) {
+			optionSelectionError = 'please select atleast one option';
+			return;
+		}
+
+		optionSelectionError = null;
+
+		const [newPassword, err] = generatePassword(passwordConfig);
+
+		if (newPassword) {
+			password = newPassword;
+		} else {
+			submissionError = err;
+			console.error(err);
+			return;
+		}
+
+		event.currentTarget.reset();
+		// --------
+		function extractFormData(): PasswordConfig {
+			const formData = new FormData(event.currentTarget);
+			const passwordLength = Number(formData.get('password-length'));
+			const uppercaseLetters = !!formData.get('uppercase-letters');
+			const lowercaseLetters = !!formData.get('lowercase-letters');
+			const numbers = !!formData.get('numbers');
+			const symbols = !!formData.get('symbols');
+			return { passwordLength, uppercaseLetters, lowercaseLetters, numbers, symbols };
+		}
+	}
 </script>
 
 {#snippet RightArrowIcon()}
@@ -24,7 +61,7 @@
 {/snippet}
 
 <section class="bg-dark-400 rounded-sm p-4">
-	<form class="space-y-4">
+	<form class="space-y-4" onsubmit={handleSubmit}>
 		<div class="space-y-4">
 			<label for="password-length" class="flex items-center justify-between">
 				<span>Password Length</span>
@@ -42,6 +79,10 @@
 				bind:value={passwordLength}
 			/>
 		</div>
+
+		{#if optionSelectionError}
+			<p class="text-accent">{optionSelectionError}</p>
+		{/if}
 
 		<div class="space-y-2">
 			<div class="flex flex-row-reverse items-center justify-end gap-4">
@@ -76,6 +117,10 @@
 		</div>
 
 		<PasswordStrength strength="weak" />
+
+		{#if submissionError}
+			<p class="text-accent">{submissionError}</p>
+		{/if}
 
 		<button
 			type="submit"
