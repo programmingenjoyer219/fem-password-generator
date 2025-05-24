@@ -1,5 +1,7 @@
 <script lang="ts">
 	import PasswordStrength from './PasswordStrength.svelte';
+
+	let passwordLength = $state(10);
 </script>
 
 {#snippet RightArrowIcon()}
@@ -20,7 +22,7 @@
 		<div class="space-y-4">
 			<label for="password-length" class="flex items-center justify-between">
 				<span>Password Length</span>
-				<span class="text-primary text-lg">10</span>
+				<span class="text-primary text-lg">{passwordLength}</span>
 			</label>
 			<input
 				class="range-slider w-full"
@@ -31,6 +33,7 @@
 				defaultValue={0}
 				name="password-length"
 				id="password-length"
+				bind:value={passwordLength}
 			/>
 		</div>
 
