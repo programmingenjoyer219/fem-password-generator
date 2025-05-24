@@ -1,6 +1,12 @@
 <script lang="ts">
 	import PasswordStrength from './PasswordStrength.svelte';
 
+	interface Props {
+		password: string;
+	}
+
+	let { password = $bindable('') }: Props = $props();
+
 	let passwordLength = $state(10);
 </script>
 
