@@ -4,11 +4,15 @@
 	}
 
 	let { password }: Props = $props();
+
+	function copyToClipboard() {
+		navigator.clipboard.writeText(password);
+	}
 </script>
 
 {#snippet CopyIcon()}
 	<svg
-		class="stroke-primary group-hover:stroke-light-300 size-6 transition-transform duration-200 group-hover:-translate-y-0.5"
+		class="stroke-primary group-hover:stroke-light-300 size-6 transition-transform duration-200 group-active:scale-110"
 		aria-hidden="true"
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 24 24"
@@ -23,6 +27,7 @@
 	<div class="flex items-center justify-between">
 		<span aria-label="Generated password:" class="text-light-400 text-xl">{password}</span>
 		<button
+			onclick={copyToClipboard}
 			title="copy to clipboard"
 			class="group border-primary hover:border-light-300 rounded border p-2 transition-colors duration-200"
 		>

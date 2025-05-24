@@ -1,24 +1,49 @@
 <script lang="ts">
-	import { type PasswordStrengthLevel } from './password.svelte';
-	import PasswordStrength from './PasswordStrength.svelte';
+	import { generatePassword, noOptionsSelected, type PasswordConfig } from './password.svelte';
 
 	interface Props {
-		length: number;
-		uppercase: boolean;
-		lowercase: boolean;
-		numbers: boolean;
-		symbols: boolean;
-		strength: PasswordStrengthLevel;
+		password: string;
 	}
 
-	let {
-		length = $bindable(0),
-		uppercase = $bindable(false),
-		lowercase = $bindable(false),
-		numbers = $bindable(false),
-		symbols = $bindable(false),
-		strength
-	}: Props = $props();
+	let { password = $bindable('') }: Props = $props();
+	let passwordLength = $state(10);
+	let optionSelectionError = $state<null | string>(null);
+	let submissionError = $state<null | string>(null);
+
+	function handleSubmit(event: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement }) {
+		event.preventDefault();
+
+		const passwordConfig = extractFormData();
+
+		if (noOptionsSelected(passwordConfig)) {
+			optionSelectionError = 'please select atleast one option';
+			return;
+		}
+
+		optionSelectionError = null;
+
+		const [newPassword, err] = generatePassword(passwordConfig);
+
+		if (newPassword) {
+			password = newPassword;
+		} else {
+			submissionError = err;
+			console.error(err);
+			return;
+		}
+
+		event.currentTarget.reset();
+		// --------
+		function extractFormData(): PasswordConfig {
+			const formData = new FormData(event.currentTarget);
+			const passwordLength = Number(formData.get('password-length'));
+			const uppercaseLetters = !!formData.get('uppercase-letters');
+			const lowercaseLetters = !!formData.get('lowercase-letters');
+			const numbers = !!formData.get('numbers');
+			const symbols = !!formData.get('symbols');
+			return { passwordLength, uppercaseLetters, lowercaseLetters, numbers, symbols };
+		}
+	}
 </script>
 
 {#snippet RightArrowIcon()}
@@ -35,24 +60,28 @@
 {/snippet}
 
 <section class="bg-dark-400 rounded-sm p-4">
-	<form class="space-y-4">
+	<form class="space-y-4" onsubmit={handleSubmit}>
 		<div class="space-y-4">
 			<label for="password-length" class="flex items-center justify-between">
 				<span>Password Length</span>
-				<span class="text-primary text-lg">{length}</span>
+				<span class="text-primary text-lg">{passwordLength}</span>
 			</label>
 			<input
 				class="range-slider w-full"
 				type="range"
-				min="0"
+				min="10"
 				max="20"
 				step="1"
 				defaultValue={0}
 				name="password-length"
 				id="password-length"
-				bind:value={length}
+				bind:value={passwordLength}
 			/>
 		</div>
+
+		{#if optionSelectionError}
+			<p class="text-accent">{optionSelectionError}</p>
+		{/if}
 
 		<div class="space-y-2">
 			<div class="flex flex-row-reverse items-center justify-end gap-4">
@@ -62,7 +91,6 @@
 					type="checkbox"
 					name="uppercase-letters"
 					id="uppercase-letters"
-					bind:checked={uppercase}
 				/>
 			</div>
 
@@ -73,34 +101,23 @@
 					type="checkbox"
 					name="lowercase-letters"
 					id="lowercase-letters"
-					bind:checked={lowercase}
 				/>
 			</div>
 
 			<div class="flex flex-row-reverse items-center justify-end gap-4">
 				<label for="numbers">Include numbers</label>
-				<input
-					class="accent-primary"
-					type="checkbox"
-					name="numbers"
-					id="numbers"
-					bind:checked={numbers}
-				/>
+				<input class="accent-primary" type="checkbox" name="numbers" id="numbers" />
 			</div>
 
 			<div class="flex flex-row-reverse items-center justify-end gap-4">
 				<label for="symbols">Include symbols</label>
-				<input
-					class="accent-primary"
-					type="checkbox"
-					name="symbols"
-					id="symbols"
-					bind:checked={symbols}
-				/>
+				<input class="accent-primary" type="checkbox" name="symbols" id="symbols" />
 			</div>
 		</div>
 
-		<PasswordStrength {strength} />
+		{#if submissionError}
+			<p class="text-accent">{submissionError}</p>
+		{/if}
 
 		<button
 			type="submit"
