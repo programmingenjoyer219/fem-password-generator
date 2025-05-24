@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { generatePassword, noOptionsSelected, type PasswordConfig } from './password.svelte';
-	import PasswordStrength from './PasswordStrength.svelte';
 
 	interface Props {
 		password: string;
@@ -115,8 +114,6 @@
 				<input class="accent-primary" type="checkbox" name="symbols" id="symbols" />
 			</div>
 		</div>
-
-		<PasswordStrength strength="weak" />
 
 		{#if submissionError}
 			<p class="text-accent">{submissionError}</p>
