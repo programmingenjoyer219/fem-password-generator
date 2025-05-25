@@ -1,1 +1,67 @@
 @import 'tailwindcss';
+
+/* colors */
+@theme {
+	--color-*: initial;
+
+	--color-black: hsl(0, 0%, 0%);
+	--color-white: hsl(0, 0%, 100%);
+
+	--color-light-300: hsl(240, 5%, 96%);
+	--color-light-400: hsl(240, 5%, 65%);
+
+	--color-dark-400: hsl(240, 4%, 16%);
+	--color-dark-500: hsl(240, 6%, 10%);
+
+	--color-primary: hsl(142, 77%, 73%);
+
+	--color-accent: hsl(50, 98%, 64%);
+}
+
+/* typography */
+@theme {
+	--font-*: initial;
+	--text-*: initial;
+
+	--font-mono: 'JetBrains Mono', monospace;
+
+	--text-base: 1rem;
+	--text-md: 1.25rem;
+	--text-lg: 1.5rem;
+	--text-xl: 1.75rem;
+}
+
+.range-slider {
+	@apply bg-primary h-2 w-full appearance-none rounded-lg;
+
+	/* Chrome & Safari */
+	&::-webkit-slider-thumb {
+		@apply bg-dark-400 h-4 w-4 cursor-pointer appearance-none rounded-full border;
+	}
+
+	/* Firefox */
+	&::-moz-range-thumb {
+		@apply bg-dark-400 h-4 w-4 cursor-pointer rounded-full;
+	}
+
+	/* Track styling for Firefox */
+	&::-moz-range-track {
+		@apply bg-primary h-2 rounded-lg;
+	}
+}
+
+:is(
+		a[href],
+		button,
+		input,
+		textarea,
+		select,
+		details,
+		[tabindex]:not([tabindex='-1'])
+	):focus-visible {
+	@apply outline-primary outline-2 outline-offset-2;
+}
+
+body {
+	@apply bg-dark-500 text-light-300 min-h-dvh font-mono;
+}
